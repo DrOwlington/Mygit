@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+	<title> PHP Kalender </title>
+</head>
+
+<body>
+<table border = "1">
+
+<?php $schicht = ["Max", "Peter", "Marie"];
+        $emails = ["Max.embedd@gmail.com", "Peter.embedd@gmail.com", "Marie.embedd@gmail.com"];
+        $woche = ["Mo", "Die", "Mi", "Do", "Fr", "Sa", "So"];
+	$index_woche = 0;
+	$kw = strftime("%V");
+        $index = $kw%3;
+        $test = 0;
+        $counter = 0;
+        start:
+?>
+
+<tr>
+	<th>KW </th>
+	<td>
+		<?php
+		echo $kw;
+		?>
+	</td>
+</tr>
+
+<tr>
+	<th>Schicht </th>
+	<td>
+		<?php
+	        if($index == 0) 
+	                echo $schicht[$index];
+	        if($index == 1)
+	                echo $schicht[$index];
+	        if($index == 2)
+	                echo $schicht[$index];
+	        ?>
+	</td>
+</tr>
+<tr>
+	<th>EMail </th>
+	<td>
+		<?php
+	        if($index == 0)
+	                echo $emails[$index];
+	        if($index == 1)
+	                echo $emails[$index];
+	        if($index == 2)
+	                echo $emails[$index];
+	        ?>
+	</td>
+</tr>
+<?php
+       wochewdh:
+<th>
+		<?php
+		echo $woche[$index_woche];
+		?>
+	</th>
+	<?php
+	if($index_woche < 7)
+		goto wochewdh;
+	?>
+	<td>
+		<?php
+		?>
+	</td>
+</tr>
+
+	<?php
+	$test++;
+	$kw++;
+	$index_woche = ($index_woche+1)%7;
+	$index =  ($index+1)%mod;
+	$counter++;
+        if($counter < 9)
+                goto start;
+        ?>
+</table>
+</body>
+</html>

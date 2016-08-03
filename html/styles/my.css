@@ -1,0 +1,23 @@
+body {
+
+}
+
+p {
+	hight: 20px;
+	width: 20px;
+	border-color: blue;
+	border-width: 2px;
+	border-style: solid;
+}
+.Clk {	
+	vertical-align: right;
+	border-color: blue;
+	border-width: 5px;
+	border-style: solid;
+}
+.memo {
+	vertical-align: right;
+        border-color: blue;
+        border-width: 5px;
+        border-style: solid;
+}

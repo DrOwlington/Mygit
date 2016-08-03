@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" http-equiv="refresh" content="30, URL=http://141.64.150.66/interface.php" />
+
+	<title>Hello World</title>
+	<link href="styles/main.css" rel="stylesheet" />
+</head>
+
+
+<body>
+<script src="jquery.js"></script>
+
+<div class="uhr">
+                <?php
+                $timestamp = time();
+                echo $date = date("d.m.Y", $timestamp);
+                ?>
+                </br>
+                <?php
+                $date = date("H:i", $timestamp);
+                echo $date;
+		$tage = array("So ", "Mo ", "Die", "Mi ", "Do ", "Fr ", "Sa ", "So");
+                $tag = date("w");
+                echo "<bold>   $tage[$tag] </bold>";
+                ?>
+</div>
+
+
+<div class="Trafic">
+<div>
+	<h2 class="Stop_Name">Fahrplan für </h2>
+</div>
+
+<p class="Depatures" />
+
+</div>
+
+
+<div class="Weather">
+<diV>
+	<h2 class="City_Name">Aktuelles Wetter für </h2> 
+	<ul class="Current_Weather" />
+</div>
+<div>
+	<h2 class="Forecast_City_Name">Wettervorhersage für </h2> 
+	<ul class="Forecast" />
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="Schedule">
+
+<table border = "1">
+
+<?php $schicht = ["Lilli", "Peter", "Johanna", "Steffan", "Johannes","Andreas"];
+        $woche = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+        $index_woche = 0;
+        $spalte = 0;
+        $week = 0;
+        $mod = sizeof($schicht);
+        $akw = strftime("%V");
+        $kw = $akw;
+        $index = $kw%$mod;
+?>
+
+<tr class="table-title">
+        <th>KW </th>
+
+        <?php
+        kw:
+        ?>
+
+        <td>
+                <?php
+                echo $kw;
+                ?>
+        </td>
+
+        <?php
+        if($spalte < 3) {
+                $spalte++;
+                if($kw == 52)
+                        $kw = 1;
+                else $kw++;
+                goto kw;
+        }
+        else
+                $spalte = 0;
+        ?>
+
+</tr>
+
+<tr>
+        <th class="table-title">Schicht </th>
+
+        <?php
+        $index = $akw%$mod;
+        schicht:
+        ?>
+
+        <td>
+                <?php
+                for($i = 0; $i < $mod; $i++) {
+                        if($index == $i)
+                                echo $schicht[$index];
+                }
+
+                ?>
+        </td>
+
+        <?php
+        if($spalte < 3) {
+                if($kw == 52)
+                        $kw = 1;
+                else $kw++;
+                $week += 7;
+                $spalte++;
+                $index = ($index+1)%$mod;
+                goto schicht;
+        }
+        else  {
+                $spalte = 0;
+                $week = 0;
+        }
+        ?>
+
+</tr>
+        <?php
+        wochewdh:
+        ?>
+<tr>
+        <th class="table-day">
+                <?php
+                echo $woche[$index_woche];
+                ?>
+        </th>
+
+        <?php
+        woche:
+        ?>
+
+        
+        <?php
+        	$zahl = $week + $index_woche;
+                echo "<script>
+                       var date = new Date();
+                        var cal = $zahl;
+                        var weekd;
+                        if (date.getDay() == 0) {
+                                weekd = 6;
+                        } else {
+                                weekd = date.getDay() - 1;
+                        }
+                        cal = cal - weekd;
+                        date.setDate(date.getDate() + cal);
+                       	if(cal == 0){
+				document.write('<td class=\'currentd\'>'+date.getDate()+'</td>');
+			} else {
+				document.write('<td>'+date.getDate()+'</td>');
+			}
+                </script>"
+        ?>
+	
+        <?php
+        if($spalte < 3) {
+                $week += 7;
+                $spalte++;
+                goto woche;
+        }
+        else {
+                $week = 0;
+                $spalte = 0;
+        }
+        ?>
+
+
+</tr>
+
+        <?php
+        if($index_woche < 6) {
+                $index_woche++;
+                goto wochewdh;
+        }
+        ?>
+</table>
+
+</div>
+
+<div class="Board">
+<div class="TXT">
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+	$(document).ready(function() {
+		$.getJSON('http://api.openweathermap.org/data/2.5/weather?q=berlinwilmersdorf&lang=de&units=metric&appid=85b934a4045bd995933536a2a5469fb3', function(data) {
+			$(".City_Name").append(data.name);
+			$(".Current_Weather").append("<li>Temperatur: " + data.main.temp +"</li><li>Wetter: " + data.weather[0].description + "</li>"+"<img src= http://openweathermap.org/img/w/" + data.weather[0].icon + ".png></img>" );
+		});
+		$.getJSON('http://api.openweathermap.org/data/2.5/forecast?q=berlinwilmersdorf&lang=de&units=metric&appid=85b934a4045bd995933536a2a5469fb3', function(data) {
+                	$(".Forecast_City_Name").append(data.city.name);
+              		for(index=1;index<5;index++){
+				var thisday = new Date();
+				thisday = whatDay(index);
+				$(".Forecast").append("<div>" +
+							"<div>" +
+								"</li>" +
+									"<bold>"+ thisday.day+"</bold>" +
+								"</li>" +
+								"<li>"+data.list[thatAfternoon(thisday, data.list, index)].weather[0].description+"</li>" +
+								"<img src= http://openweathermap.org/img/w/" + data.list[thatAfternoon(thisday, data.list, index)].weather[0].icon + ".png />" +
+								"<p class='Temp'>"+data.list[thatAfternoon(thisday, data.list, index)].main.temp+"</p>" +
+							"</div>" +
+							"</div>" );
+                       	};
+          	});
+
+	function whatDay(d){
+		var retd = new Date();
+		if(d==1){
+			retd.day = "Morgen";
+		} else if (d==2){
+			retd.day = "Übermorgen";
+		} else if (d==3){
+			retd.day = "In 3 Tagen";
+		} else if (d==4){
+			retd.day = "In 4 Tagen";
+		}
+		return retd;
+	}
+	});
+
+	function thatAfternoon(d, li, i){
+		var thisGet =d.getDate() + i;
+		var ret;
+		$.each(li, function(index){
+			var thisDate = li[index].dt_txt;
+			var thisHour = li[index].dt_txt;
+			thisDate = thisDate.slice(8, 10);
+			thisHour = thisHour.slice(11, 13);
+			if(thisGet == thisDate){
+				if(thisHour == 15){
+					ret = index;
+				}
+			}
+		});
+		return ret;
+	}
+
+
+</script>
+<script>
+	$(document).ready(function() {
+		$.getJSON('https://bvg-api.herokuapp.com/station/9043101', function(data) {
+			console.log("HEY");
+			$(".Stop_Name").append(data[0].name);
+			for(i=0;i<3;i++){
+				$(".Depatures").append(
+					"<div>" +
+					colorcheck(data[0].departures[i].line) +
+					"<ul><li class'Dir'>Richtung " + data[0].departures[i].direction + "</li><li><bold>" + data[0].departures[i].time + "<bold></li>" +
+						
+					"</div>");
+			};
+		});
+
+         });
+
+	function colorcheck(a) {
+		var ret;
+		var first = a.charAt(0);
+		if(first == "B") {
+			ret = '<img src=\'http://da-luma.de/wp-content/uploads/2015/06/bus.png\'></img><big class="Vehicle">' + a + '</big>'
+		} else if (first == "U") {
+                        ret = '<img src=\'https://www.bvg.de/images/content/bvgicons/ubahn.gif\'></img><big class="Vehicle">' + a + '</big>'
+		} else {
+			console.log("N");
+			ret = a
+		}
+		return ret
+	}
+
+
+
+
+
+
+
+
+
+</script>
+
+<script>
+$(document).ready(function() {
+        var txt = "pi";
+        $.post("http://appinvtinywebdb.appspot.com/getvalue", {tag: txt}, function(data){
+                var thisdata = data.split("\\\\n\\\\n").join( "\\\\n");
+                var word=thisdata.split("\\\\n");
+                word[word.length-1]=word[word.length-1].split("\\")[0];
+                for(i=(word.length-13); i<(word.length); i++){
+			$(".TXT").append("<li>"+word[i]+"</li>");
+                }
+        });
+});
+</script>
+
+
+</body>
+</html>

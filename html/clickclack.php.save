@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="de">
+<head>
+	<title>Digi Uhr </title>
+	<meta charset="utf-8">
+</head>
+
+<body>
+	<?php
+	$woche = [
+	$timestamp = time();
+	echo $date = date("d.m.Y", $timestamp);
+	?>
+	</br>
+	<?php
+	$date = date("H:i", $timestamp)
+	$tage = date("w");
+	echo $date + "" + $tage;
+	?>
+</body>
+</html>

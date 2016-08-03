@@ -1,0 +1,142 @@
+body{
+	background: #733;
+	font-family: arial;
+}
+
+bold{
+	font-weight:bold;
+}
+
+h2{
+	margin: 10px;
+	color: #533;
+}
+
+.Weather, .Trafic, .Schedule {
+	width:47%;
+	background: #555;
+	padding: 5px;
+	margin: 0px;
+}
+
+th {
+	margin-right: 8px;
+	margin-left: 8px;
+	font-size: 30px;
+	font-family: Geogia, 'Times New Roman', serif;
+}
+
+td {
+	width: 80px;
+	margin: 5px 5px;
+	font-family: Geogria, 'Times New Roman', serif;
+	font-size: 25px;
+	text-align: center;
+}
+
+table{
+	background-color: #999;
+	border-collapse: collapse;
+	border: 3px bold;
+	margin:5px;
+}
+
+.Schedule{
+	position: absolute;
+	left: 220px;
+	top: 30px;
+	margin: 10px;
+	height:330px;
+        width:450px;
+        -moz-border-radius: 15px;
+        -webkit-border-radius:15px;
+}
+
+.botext {
+	position: absolute;
+	top: 600px;
+        margin: 5px;
+	height:200px;
+        width:200px;
+        -moz-border-radius: 100px;
+        -webkit-border-radius: 100px;
+        background: #ccc;
+}
+
+.Clock {
+	
+
+}
+big{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.Trafic{
+	float:left;
+}
+
+.Trafic ul{
+	text-align: right;
+	margin-left: auto;
+	margin-rigt: 20px;
+	padding-left: auto;
+	padding-right: 20px;
+	display: inline-table;
+	list-style-type: none;
+}
+
+.Weather{
+	float: right;
+}
+
+.Weather div, .Trafic div, .Schedule div {
+	background:#777;
+	margin: 10px;
+	padding: 1px 0px 1px 10px;
+}
+
+.Weather ul{
+	padding-top: 1px;
+	margin-top: 0px;
+}
+
+.City_Name{
+	
+}
+
+.Current_Weather{
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+
+
+.Forecast div{
+	font-size: 12px;
+	display: inline-block;
+	background: #444;
+	margin: 2px;
+	padding: 0px;
+}
+.Forecast img{
+	height:30px;
+	width:30px;
+}
+
+.Forecast div div{
+	color: black;
+	background:#999;
+	list-style-type: none;
+	display: inline-block;
+	margin: 5px;
+	padding: 5px 5px 0px 5px;
+        font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.Temp{
+	font-size:18px;
+	color: white;
+	display: inline-block;
+	margin: 1px 10px 0px 0px;
+	float: right;	
+}
